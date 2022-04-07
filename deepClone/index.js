@@ -3,6 +3,7 @@ function deepclone(obj) {
   if (target && typeof obj) {
     for (key in obj) {
       if (obj[key] && obj[key] instanceof RegExp === true) {
+        // 在这里正则表达式是一个引用类型，原 lastIndex 会互通，但是 source 和 flags不会
         target[key] = new RegExp(obj[key].source, obj[key].flags);
         target[key].lastIndex = obj[key].lastIndex;
       } else if (obj[key] && typeof obj[key] === 'object') {
@@ -60,3 +61,4 @@ const r = {
 }
 
 export default deepclone;
+
